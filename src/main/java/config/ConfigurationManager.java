@@ -19,11 +19,9 @@ public class ConfigurationManager {
         return Boolean.parseBoolean(ConfigReader.get(ConfigKeys.HEADLESS.getKey()));
     }
 
-    public static String getUserName() {
-        return ConfigReader.get(ConfigKeys.USERNAME.getKey());
-    }
+    public static String getFromDestination() { return ConfigReader.get(ConfigKeys.FROM.getKey()); }
 
-    public static String getPassword() {
-        return ConfigReader.get(ConfigKeys.PASSWORD.getKey());
-    }
+    public static String getToDestination() { return ConfigReader.get(ConfigKeys.TO.getKey()); }
+
+
 }

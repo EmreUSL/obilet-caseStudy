@@ -1,0 +1,5 @@
+browser=CHROME
+baseUrl=https://www.obilet.com/
+headless=false
+from = İstanbul Avrupa
+to = Giresun

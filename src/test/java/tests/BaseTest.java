@@ -12,11 +12,12 @@ public abstract class BaseTest {
     void setUp() {
        // DriverManager.initDriver();
         DriverManager.getDriver().get(ConfigurationManager.getBaseUrl());
+        DriverManager.getDriver().manage().window().maximize();
     }
 
     @AfterMethod
     void tearDown() {
         VerifyActions.assertAll();
-        DriverManager.quitDriver();
+        // DriverManager.quitDriver();
     }
 }

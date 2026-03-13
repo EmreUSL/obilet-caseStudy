@@ -8,6 +8,7 @@ import org.openqa.selenium.support.ui.Wait;
 
 
 import java.time.Duration;
+import java.util.List;
 
 public class WaitActions {
 
@@ -24,6 +25,10 @@ public class WaitActions {
 
     public static WebElement waitForVisible(By locator) {
         return getFluentWait().until(ExpectedConditions.visibilityOfElementLocated(locator));
+    }
+
+    public static List<WebElement> waitForVisibleAll(By locator) {
+        return getFluentWait().until(ExpectedConditions.visibilityOfAllElementsLocatedBy(locator));
     }
 
     public static WebElement waitForClickable(By locator) {

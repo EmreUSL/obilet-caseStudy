@@ -4,8 +4,8 @@ public enum ConfigKeys {
     BROWSER("browser"),
     BASE_URL("baseUrl"),
     HEADLESS("headless"),
-    USERNAME("username"),
-    PASSWORD("password");
+    FROM("from"),
+    TO("to");
 
     private final String key;
 

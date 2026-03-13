@@ -4,10 +4,15 @@ import core.driver.DriverManager;
 import io.qameta.allure.Allure;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
+import java.awt.event.KeyEvent;
+import java.security.Key;
+import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Supplier;
 
 public class UIActions {
@@ -47,12 +52,56 @@ public class UIActions {
         }
     }
 
+    public static void selectRandomIndex(By locator) {
+        try {
+            Allure.step("Select random element from list: " + locator, () -> {
+                executeWithRetry(() -> {
+                    List<WebElement> elements = WaitActions.waitForVisibleAll(locator);
+
+                    if (elements.isEmpty()) {
+                        throw new RuntimeException("No elements found for locator: " + locator);
+                    }
+
+                    int randomIndex = ThreadLocalRandom.current().nextInt(elements.size());
+                    WebElement element = elements.get(randomIndex);
+
+                    element.click();
+                    return null;
+                }, "SelectRandomIndex");
+            });
+        } catch (RuntimeException e) {
+            Allure.step("Normal click failed, trying JS click for random element: " + locator, () -> {
+                List<WebElement> elements = WaitActions.waitForVisibleAll(locator);
+                if (!elements.isEmpty()) {
+                    int randomIndex = ThreadLocalRandom.current().nextInt(elements.size());
+                    jsClickInternal((By) elements.get(randomIndex));
+                } else {
+                    throw new RuntimeException("No elements found for JS click: " + locator, e);
+                }
+            });
+        }
+    }
+
+
     public static void type(By locator, String text) {
         Allure.step("Type '" + text + "' into element: " + locator, () -> {
             executeWithRetry(() -> {
                 WebElement element = WaitActions.waitForVisible(locator);
                 element.clear();
                 element.sendKeys(text);
+                return null;
+            }, "Type");
+        });
+    }
+
+
+    public static void typeAndEnter(By locator, String text) {
+        Allure.step("Type '" + text + "' into element: " + locator, () -> {
+            executeWithRetry(() -> {
+                WebElement element = WaitActions.waitForVisible(locator);
+                element.clear();
+                element.sendKeys(text);
+                element.sendKeys(Keys.ENTER);
                 return null;
             }, "Type");
         });
