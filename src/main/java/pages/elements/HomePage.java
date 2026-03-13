@@ -1,7 +1,6 @@
 package pages.elements;
-
-
 import config.ConfigurationManager;
+import core.driver.DriverManager;
 import org.openqa.selenium.By;
 
 public class HomePage {
@@ -13,6 +12,8 @@ public class HomePage {
     public static final By destinationTo = By.id("destination-input");
     public static final By calendarBtn = By.cssSelector("div[class='departure group']");
     public static final By searchBtn = By.id("search-button");
+
+
 
 
 

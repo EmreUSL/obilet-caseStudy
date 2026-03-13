@@ -1,6 +1,7 @@
 package utils;
 
 import core.driver.DriverManager;
+import enums.Gender;
 import io.qameta.allure.Allure;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -14,6 +15,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 public class UIActions {
 
@@ -77,6 +79,50 @@ public class UIActions {
                     jsClickInternal((By) elements.get(randomIndex));
                 } else {
                     throw new RuntimeException("No elements found for JS click: " + locator, e);
+                }
+            });
+        }
+    }
+
+    public static void selectRandomSeatByGender(By locator, Gender gender) {
+        try {
+            Allure.step("Select random available seat for gender: " + gender, () -> {
+                executeWithRetry(() -> {
+                    List<WebElement> allSeats = WaitActions.waitForVisibleAll(locator);
+
+                    List<WebElement> filteredSeats = allSeats.stream()
+                            .filter(seat -> {
+                                String available = seat.getAttribute("obilet:available");
+                                return available != null && (available.equals("all") || available.equals(gender.getValue()));
+                            })
+                            .collect(Collectors.toList());
+
+                    if (filteredSeats.isEmpty()) {
+                        throw new RuntimeException("No available seats found for gender: " + gender);
+                    }
+
+                    int randomIndex = ThreadLocalRandom.current().nextInt(filteredSeats.size());
+                    filteredSeats.get(randomIndex).click();
+
+                    return null;
+                }, "SelectRandomSeatByGender");
+            });
+        } catch (RuntimeException e) {
+            Allure.step("Normal click failed, trying JS click for random seat for gender: " + gender, () -> {
+                List<WebElement> allSeats = WaitActions.waitForVisibleAll(By.tagName("a"));
+
+                List<WebElement> filteredSeats = allSeats.stream()
+                        .filter(seat -> {
+                            String available = seat.getAttribute("obilet:available");
+                            return available != null && (available.equals("all") || available.equals(gender.getValue()));
+                        })
+                        .collect(Collectors.toList());
+
+                if (!filteredSeats.isEmpty()) {
+                    int randomIndex = ThreadLocalRandom.current().nextInt(filteredSeats.size());
+                    jsClickInternal((By) filteredSeats.get(randomIndex));
+                } else {
+                    throw new RuntimeException("No available seats found for JS click for gender: " + gender, e);
                 }
             });
         }
