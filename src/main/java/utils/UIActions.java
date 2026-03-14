@@ -141,18 +141,6 @@ public class UIActions {
     }
 
 
-    public static void typeAndEnter(By locator, String text) {
-        Allure.step("Type '" + text + "' into element: " + locator, () -> {
-            executeWithRetry(() -> {
-                WebElement element = WaitActions.waitForVisible(locator);
-                element.clear();
-                element.sendKeys(text);
-                element.sendKeys(Keys.ENTER);
-                return null;
-            }, "Type");
-        });
-    }
-
     public static String getText(By locator) {
         return Allure.step("Get text from element: " + locator, () ->
                 executeWithRetry(

@@ -5,7 +5,8 @@ public enum ConfigKeys {
     BASE_URL("baseUrl"),
     HEADLESS("headless"),
     FROM("from"),
-    TO("to");
+    TO("to"),
+    HOTELDESTINATON("hotelDestination");
 
     private final String key;
 

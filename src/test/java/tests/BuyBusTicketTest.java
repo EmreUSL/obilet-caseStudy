@@ -1,35 +1,38 @@
 package tests;
 
 import assertions.AssertActions;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.actions.HomePageActions;
 import pages.actions.PaymentPageActions;
-import pages.actions.ResultPageActions;
+import pages.actions.BusResultPageActions;
 
 public class BuyBusTicketTest extends BaseTest {
 
     @Test
-    public void searchAndBuyTicket() {
-        HomePageActions.selectLanguage();
-        HomePageActions.selectFrom();
-        HomePageActions.selectTo();
-        HomePageActions.search();
+    public void searchAndBuyTicketTest() {
+        HomePageActions homePage = new HomePageActions();
+        PaymentPageActions paymentPage = new PaymentPageActions();
+        BusResultPageActions resultPage = new BusResultPageActions();
 
-        ResultPageActions.closePopUp();
-        AssertActions.assertTrue(ResultPageActions.isResultPageOpen(), "Result page is not open");
-        ResultPageActions.selectRandomBusTrip();
-        ResultPageActions.selectSeat();
+        homePage.selectLanguage();
+        homePage.selectFrom();
+        homePage.selectTo();
+        homePage.search();
 
-        String price = ResultPageActions.getSelectedSeatPrice();
+        resultPage.closePopUp();
+        AssertActions.assertTrue(resultPage.isResultPageOpen(), "Result page is not open");
+        resultPage.selectRandomBusTrip();
+        resultPage.selectSeat();
+
+        String price = resultPage.getSelectedSeatPrice();
         System.out.println("Price is: " + price);
-        ResultPageActions.clickOkButton();
+        resultPage.clickOkButton();
 
-        AssertActions.assertTrue(PaymentPageActions.isPaymentPageOpened(), "Payment page is not opened");
+        AssertActions.assertTrue(paymentPage.isPaymentPageOpened(), "Payment page is not opened");
 
-        String destinationFrom =  PaymentPageActions.getDestinationFrom();
-        String destinationTo =  PaymentPageActions.getDestinationTo();
-        String destinationPrice = PaymentPageActions.getDestinationPrice();
+        String destinationFrom =  paymentPage.getDestinationFrom();
+        String destinationTo =  paymentPage.getDestinationTo();
+        String destinationPrice = paymentPage.getDestinationPrice();
 
         System.out.println("Destination from is: " + destinationFrom);
         System.out.println("Destination to is: " + destinationTo);
