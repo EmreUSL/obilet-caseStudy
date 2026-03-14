@@ -19,20 +19,4 @@ public class AllureStepUtil {
         ScreenshotUtil.takeScreenshot(driver, stepName + "_fail");
         ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
     }
-
-    // Highlight success element
-    public static void highlightSuccess(WebDriver driver, WebElement element) {
-        if (element != null) {
-            ((JavascriptExecutor) driver)
-                    .executeScript("arguments[0].style.border='3px solid green'", element);
-        }
-    }
-
-    // Highlight fail element
-    public static void highlightFailure(WebDriver driver, WebElement element) {
-        if (element != null) {
-            ((JavascriptExecutor) driver)
-                    .executeScript("arguments[0].style.border='3px solid red'", element);
-        }
-    }
 }

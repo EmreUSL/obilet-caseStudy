@@ -10,7 +10,7 @@ public abstract class BaseTest {
 
     @BeforeMethod
     void setUp() {
-       // DriverManager.initDriver();
+        DriverManager.initDriver();
         DriverManager.getDriver().get(ConfigurationManager.getBaseUrl());
         DriverManager.getDriver().manage().window().maximize();
     }
@@ -18,6 +18,6 @@ public abstract class BaseTest {
     @AfterMethod
     void tearDown() {
         VerifyActions.assertAll();
-        // DriverManager.quitDriver();
+        DriverManager.quitDriver();
     }
 }

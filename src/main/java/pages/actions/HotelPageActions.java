@@ -1,9 +1,6 @@
 package pages.actions;
 
-
 import config.ConfigurationManager;
-
-import pages.elements.HomePage;
 import pages.elements.HotelPage;
 import utils.UIActions;
 import utils.WaitActions;

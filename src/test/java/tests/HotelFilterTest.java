@@ -5,7 +5,6 @@ import org.testng.annotations.Test;
 import pages.actions.HomePageActions;
 import pages.actions.HotelPageActions;
 import pages.actions.HotelResultPageActions;
-import pages.elements.HotelResultPage;
 
 public class HotelFilterTest extends BaseTest{
 
@@ -24,6 +23,8 @@ public class HotelFilterTest extends BaseTest{
         Assert.assertTrue(hotelResultPage.isHotelResultPageOpened(), "Search Hotel Page is not Opened");
 
         hotelResultPage.selectFilter();
+        Assert.assertTrue(hotelResultPage.isFilterSelected(), "Filter is not Selected");
+
         hotelResultPage.sortResults();
         Assert.assertTrue(hotelResultPage.isSortedPricesCorrect(), "Sort Prices are not correct");
     }

@@ -20,6 +20,10 @@ public class HotelResultPageActions {
         UIActions.click(HotelResultPage.selectFilter);
     }
 
+    public boolean isFilterSelected() {
+        return UIActions.isSelected(HotelResultPage.selectFilter);
+    }
+
     public void sortResults() {
         UIActions.scrollToElement(HotelResultPage.resultPage);
         UIActions.click(HotelResultPage.sortButton);

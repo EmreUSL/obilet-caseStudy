@@ -6,6 +6,7 @@ public enum ConfigKeys {
     HEADLESS("headless"),
     FROM("from"),
     TO("to"),
+    BUSTRIPDATE("busTripDate"),
     HOTELDESTINATON("hotelDestination");
 
     private final String key;

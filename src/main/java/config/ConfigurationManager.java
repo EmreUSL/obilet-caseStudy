@@ -23,6 +23,8 @@ public class ConfigurationManager {
 
     public static String getToDestination() { return ConfigReader.get(ConfigKeys.TO.getKey()); }
 
+    public static String getDate() { return ConfigReader.get(ConfigKeys.BUSTRIPDATE.getKey()); }
+
     public static String getHotelDestination() { return ConfigReader.get(ConfigKeys.HOTELDESTINATON.getKey());}
 
 

@@ -2,6 +2,7 @@ package pages.actions;
 
 import pages.elements.PaymentPage;
 import utils.UIActions;
+import utils.WaitActions;
 
 public class PaymentPageActions {
 
@@ -18,6 +19,7 @@ public class PaymentPageActions {
     }
 
     public String getDestinationPrice() {
+        WaitActions.waitForVisible(PaymentPage.packageType);
         return UIActions.getText(PaymentPage.destinationPrice);
     }
 }

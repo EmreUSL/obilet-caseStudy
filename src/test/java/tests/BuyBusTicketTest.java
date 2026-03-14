@@ -17,6 +17,7 @@ public class BuyBusTicketTest extends BaseTest {
         homePage.selectLanguage();
         homePage.selectFrom();
         homePage.selectTo();
+        homePage.selectDateFromCalendar();
         homePage.search();
 
         resultPage.closePopUp();
@@ -25,7 +26,8 @@ public class BuyBusTicketTest extends BaseTest {
         resultPage.selectSeat();
 
         String price = resultPage.getSelectedSeatPrice();
-        System.out.println("Price is: " + price);
+        String originLocation = resultPage.getOriginLocation();
+        String destinationLocation = resultPage.getDestinationLocation();
         resultPage.clickOkButton();
 
         AssertActions.assertTrue(paymentPage.isPaymentPageOpened(), "Payment page is not opened");
@@ -34,11 +36,8 @@ public class BuyBusTicketTest extends BaseTest {
         String destinationTo =  paymentPage.getDestinationTo();
         String destinationPrice = paymentPage.getDestinationPrice();
 
-        System.out.println("Destination from is: " + destinationFrom);
-        System.out.println("Destination to is: " + destinationTo);
-        System.out.println("Destination price is: " + destinationPrice);
-
         AssertActions.assertEquals(price, destinationPrice, "Prices are not equal");
-
+        AssertActions.assertEquals(originLocation, destinationFrom, "Origin location are not equal");
+        AssertActions.assertEquals(destinationLocation, destinationTo, "Destination location are not equal");
     }
 }

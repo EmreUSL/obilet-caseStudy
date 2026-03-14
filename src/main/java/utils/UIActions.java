@@ -54,6 +54,7 @@ public class UIActions {
         }
     }
 
+
     public static void selectRandomIndex(By locator) {
         try {
             Allure.step("Select random element from list: " + locator, () -> {
@@ -120,7 +121,7 @@ public class UIActions {
 
                 if (!filteredSeats.isEmpty()) {
                     int randomIndex = ThreadLocalRandom.current().nextInt(filteredSeats.size());
-                    jsClickInternal((By) filteredSeats.get(randomIndex));
+                    jsClickInternalElement(filteredSeats.get(randomIndex));
                 } else {
                     throw new RuntimeException("No available seats found for JS click for gender: " + gender, e);
                 }
@@ -160,6 +161,20 @@ public class UIActions {
             );
         } catch (Exception e) {
             Allure.step("Element is NOT displayed: " + locator);
+            return false;
+        }
+    }
+
+    public static boolean isSelected(By locator) {
+        try {
+            return Allure.step("Check if element is selected: " + locator, () ->
+                    executeWithRetry(() -> {
+                        WebElement element = WaitActions.waitForVisible(locator);
+                        return element != null && element.isSelected();
+                    }, "Is Displayed")
+            );
+        } catch (Exception e) {
+            Allure.step("Element is NOT selected: " + locator);
             return false;
         }
     }
@@ -219,6 +234,10 @@ public class UIActions {
         WebElement element = WaitActions.waitForVisible(locator);
         ((JavascriptExecutor) DriverManager.getDriver())
                 .executeScript("arguments[0].click();", element);
+    }
+    public static void jsClickInternalElement(WebElement element) {
+        JavascriptExecutor js = (JavascriptExecutor) DriverManager.getDriver();
+        js.executeScript("arguments[0].click();", element);
     }
 }
 

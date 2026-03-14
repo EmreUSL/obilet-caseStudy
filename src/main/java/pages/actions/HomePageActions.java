@@ -1,8 +1,11 @@
 package pages.actions;
 
 import config.ConfigurationManager;
+import core.driver.DriverManager;
+import org.openqa.selenium.WebElement;
 import pages.elements.HomePage;
 import utils.UIActions;
+import utils.WaitActions;
 
 public class HomePageActions {
 
@@ -25,6 +28,24 @@ public class HomePageActions {
     }
 
     public void selectDateFromCalendar() {
+        UIActions.click(HomePage.calendarBtn);
+
+        boolean isDateSelect = false;
+
+        while (!isDateSelect) {
+            try {
+                WebElement month = DriverManager.getDriver().findElement(HomePage.date);
+                month.isDisplayed();
+                isDateSelect = true;
+            } catch (Exception e) {
+                UIActions.click(HomePage.changeMonth);
+                WaitActions.waitForVisible(HomePage.changeMonth);
+            }
+        }
+
+        UIActions.click(HomePage.date);
+
+
 
     }
 
