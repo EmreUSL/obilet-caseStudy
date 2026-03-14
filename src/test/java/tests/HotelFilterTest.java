@@ -24,5 +24,7 @@ public class HotelFilterTest extends BaseTest{
         Assert.assertTrue(hotelResultPage.isHotelResultPageOpened(), "Search Hotel Page is not Opened");
 
         hotelResultPage.selectFilter();
+        hotelResultPage.sortResults();
+        Assert.assertTrue(hotelResultPage.isSortedPricesCorrect(), "Sort Prices are not correct");
     }
 }
