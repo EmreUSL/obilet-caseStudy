@@ -5,11 +5,11 @@ Testler, **Selenium WebDriver** kullanılarak **Java** diliyle yazılmıştır v
 
 ---
 
-## 📝 Test Senaryosu
+### 📝 Test Senaryosu
 
 Aşağıdaki adımlar otomasyon kapsamında test edilmiştir:
 
-## 📝 Test Case 1
+### 📝 Test Case 1
 
 1. 🌐 https://www.obilet.com sitesi ziyaret edilir.  
 2. 🔍 Kullanıcı ana menüden otobüs dikeyine tıklar.
@@ -46,3 +46,12 @@ Aşağıdaki adımlar otomasyon kapsamında test edilmiştir:
   Kişisel olarak geliştirdiğim test otomasyon frameworkü bu projede kullandım.
   Framework ile ilgili detaylı bilgiye aşağıdaki link üzerinden ulaşabilirsiniz:  
   🔗 https://github.com/EmreUSL/selenium-automation-template
+
+
+
+  ---
+
+### 🏠 Allure Report
+Terminal ekranına **allure serve allure-results** yazarak Allure Report ekranına ulaşabilirsiniz.
+
+
