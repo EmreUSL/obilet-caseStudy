@@ -1,5 +1,4 @@
 package pages.elements;
-import config.ConfigKeys;
 import config.ConfigurationManager;
 import org.openqa.selenium.By;
 

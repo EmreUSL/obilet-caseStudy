@@ -21,7 +21,7 @@ public class BuyBusTicketTest extends BaseTest {
         homePage.search();
 
         resultPage.closePopUp();
-        AssertActions.assertTrue(resultPage.isResultPageOpen(), "Result page is not open");
+        AssertActions.assertTrue(resultPage.isResultPageOpen(), "Verify result page is opened");
         resultPage.selectRandomBusTrip();
         resultPage.selectSeat();
 
@@ -30,14 +30,14 @@ public class BuyBusTicketTest extends BaseTest {
         String destinationLocation = resultPage.getDestinationLocation();
         resultPage.clickOkButton();
 
-        AssertActions.assertTrue(paymentPage.isPaymentPageOpened(), "Payment page is not opened");
+        AssertActions.assertTrue(paymentPage.isPaymentPageOpened(), "Verify payment page is opened");
 
         String destinationFrom =  paymentPage.getDestinationFrom();
         String destinationTo =  paymentPage.getDestinationTo();
         String destinationPrice = paymentPage.getDestinationPrice();
 
-        AssertActions.assertEquals(price, destinationPrice, "Prices are not equal");
-        AssertActions.assertEquals(originLocation, destinationFrom, "Origin location are not equal");
-        AssertActions.assertEquals(destinationLocation, destinationTo, "Destination location are not equal");
+        AssertActions.assertEquals(price, destinationPrice, "Verify prices are equal");
+        AssertActions.assertEquals(originLocation, destinationFrom, "Verify origin location is correct");
+        AssertActions.assertEquals(destinationLocation, destinationTo, "Verify destination location is correct");
     }
 }

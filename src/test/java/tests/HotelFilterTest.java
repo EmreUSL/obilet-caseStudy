@@ -1,6 +1,6 @@
 package tests;
 
-import org.testng.Assert;
+import assertions.AssertActions;
 import org.testng.annotations.Test;
 import pages.actions.HomePageActions;
 import pages.actions.HotelPageActions;
@@ -20,12 +20,12 @@ public class HotelFilterTest extends BaseTest{
         hotelPage.selectDestination();
         hotelPage.searchHotel();
 
-        Assert.assertTrue(hotelResultPage.isHotelResultPageOpened(), "Search Hotel Page is not Opened");
+        AssertActions.assertTrue(hotelResultPage.isHotelResultPageOpened(), "Verify hotel result page is opened");
 
         hotelResultPage.selectFilter();
-        Assert.assertTrue(hotelResultPage.isFilterSelected(), "Filter is not Selected");
+        AssertActions.assertTrue(hotelResultPage.isFilterSelected(), "Verify filter is selected");
 
         hotelResultPage.sortResults();
-        Assert.assertTrue(hotelResultPage.isSortedPricesCorrect(), "Sort Prices are not correct");
+        AssertActions.assertTrue(hotelResultPage.isSortedPricesCorrect(), "Verify prices are sorted correctly");
     }
 }
