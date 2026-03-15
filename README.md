@@ -55,3 +55,5 @@ Aşağıdaki adımlar otomasyon kapsamında test edilmiştir:
 Terminal ekranına **allure serve allure-results** yazarak Allure Report ekranına ulaşabilirsiniz.
 
 
+
+
